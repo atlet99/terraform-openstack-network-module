@@ -22,7 +22,7 @@ Terraform >= 1.5.0.
 ```hcl
 module "network-module" {
   source  = "atlet99/network-module/openstack"
-  version = "1.0.3"
+  version = "1.0.5"
   # insert the 2 required variables here
 }
 ```
@@ -32,7 +32,7 @@ module "network-module" {
 ```hcl
 module "example_net" {
   source  = "atlet99/network-module/openstack"
-  version = "1.0.3"
+  version = "1.0.5"
 
   name   = "example"
   router = {

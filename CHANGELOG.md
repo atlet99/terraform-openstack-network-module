@@ -5,11 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.0.5] - 2026-03-10
+
 ## [1.0.4] - 2026-03-10
 
 ### Changed
 
 - [CI] - bump release;
+- Release v1.0.4
 
 ## [1.0.3] - 2026-03-10
 
@@ -42,6 +45,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - [FIX] up to 3.0.0 versions;
 
+[1.0.5]: https://github.com/atlet99/terraform-openstack-network-module/compare/v1.0.4..v1.0.5
 [1.0.4]: https://github.com/atlet99/terraform-openstack-network-module/compare/v1.0.3..v1.0.4
 [1.0.3]: https://github.com/atlet99/terraform-openstack-network-module/compare/v1.0.2..v1.0.3
 [1.0.2]: https://github.com/atlet99/terraform-openstack-network-module/compare/v1.0.1..v1.0.2
