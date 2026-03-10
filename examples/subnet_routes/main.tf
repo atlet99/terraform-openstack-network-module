@@ -1,17 +1,5 @@
-terraform {
-  required_providers {
-    openstack = {
-      source = "terraform-provider-openstack/openstack"
-    }
-  }
-}
-
-provider "openstack" {
-  cloud = terraform.workspace
-}
-
 module "example_subnet_routes" {
-  source = "haxorof/network/openstack"
+  source = "../../"
   name   = "example-subnet-routes"
   router = {
     create = true

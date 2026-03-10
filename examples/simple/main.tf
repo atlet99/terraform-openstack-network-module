@@ -1,34 +1,28 @@
-terraform {
-  required_version = ">= 0.13"
-  required_providers {
-    openstack = {
-      source = "terraform-provider-openstack/openstack"
-    }
-  }
-}
-
-
-provider "openstack" {
-  cloud = terraform.workspace
-}
-
 module "example_simple_one_net" {
-  source      = "haxorof/network/openstack"
+  source      = "../../"
   name        = "example-simple-one-net"
   description = "Network with only one subnet connected to it."
   subnets = [
     { cidr = "192.168.199.0/24" },
   ]
+  router = {
+    create              = false
+    external_network_id = ""
+  }
 }
 
 module "example_simple_two_dns_net" {
-  source      = "haxorof/network/openstack"
+  source      = "../../"
   name        = "example-two-dns-net"
   description = "Network with only two subnet connected to it with defined DNS."
   subnets = [
     { cidr = "192.168.0.0/24", dns_nameservers = ["8.8.8.8", "8.8.4.4"] },
     { cidr = "192.168.1.0/24", dns_nameservers = ["1.1.1.1", "1.0.0.1"] },
   ]
+  router = {
+    create              = false
+    external_network_id = ""
+  }
 }
 
 resource "openstack_networking_port_v2" "port_subnet_0" {
