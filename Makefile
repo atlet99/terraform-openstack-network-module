@@ -86,8 +86,10 @@ release: check-deps ## Create a release: make release [VERSION=x.y.z]
 	fi; \
 	version=$${version#v}; \
 	echo "Releasing v$$version (current: v$(CURRENT_VERSION))..."; \
+	sed -i.bak -e "s/version = \".*\"/version = \"$$version\"/g" README.md; \
+	rm -f README.md.bak; \
 	git cliff --bump --tag "v$$version" -o CHANGELOG.md; \
-	git add CHANGELOG.md; \
+	git add CHANGELOG.md README.md; \
 	git commit -m "chore: release v$$version"; \
 	git tag -a "v$$version" -m "Release v$$version"; \
 	echo "Done. Run 'git push && git push --tags' to publish."
@@ -99,8 +101,10 @@ tag: check-deps ## Create a tag with CHANGELOG update: make tag [VERSION=x.y.z]
 	fi; \
 	version=$${version#v}; \
 	echo "Creating tag v$$version (current: v$(CURRENT_VERSION))..."; \
+	sed -i.bak -e "s/version = \".*\"/version = \"$$version\"/g" README.md; \
+	rm -f README.md.bak; \
 	git cliff --bump --tag "v$$version" -o CHANGELOG.md; \
-	git add CHANGELOG.md; \
+	git add CHANGELOG.md README.md; \
 	git commit -m "chore: release v$$version"; \
 	git tag -a "v$$version" -m "Release v$$version"; \
 	echo "Tag v$$version created. Run 'git push && git push --tags' to publish."
