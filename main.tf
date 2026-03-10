@@ -15,6 +15,11 @@ resource "openstack_networking_network_v2" "this" {
   admin_state_up          = var.admin_state_up
   region                  = var.region == null ? null : var.region
   availability_zone_hints = var.az == null ? null : var.az
+  mtu                     = var.mtu
+  port_security_enabled   = var.port_security_enabled
+  dns_domain              = var.dns_domain
+  qos_policy_id           = var.qos_policy_id
+  transparent_vlan        = var.transparent_vlan
 }
 
 resource "openstack_networking_subnet_v2" "this" {
@@ -26,13 +31,27 @@ resource "openstack_networking_subnet_v2" "this" {
     lookup(var.subnets[count.index], "ip_version", 4),
     count.index + 1
   ))
-  description     = lookup(var.subnets[count.index], "description", null)
-  cidr            = lookup(var.subnets[count.index], "cidr", null)
-  ip_version      = lookup(var.subnets[count.index], "ip_version", null)
-  dns_nameservers = lookup(var.subnets[count.index], "dns_nameservers", null)
-  enable_dhcp     = lookup(var.subnets[count.index], "enable_dhcp", false)
-  gateway_ip      = lookup(var.subnets[count.index], "gateway_ip", null)
-  no_gateway      = lookup(var.subnets[count.index], "no_gateway", null)
+  description          = lookup(var.subnets[count.index], "description", null)
+  cidr                 = lookup(var.subnets[count.index], "cidr", null)
+  ip_version           = lookup(var.subnets[count.index], "ip_version", null)
+  dns_nameservers      = lookup(var.subnets[count.index], "dns_nameservers", null)
+  enable_dhcp          = lookup(var.subnets[count.index], "enable_dhcp", false)
+  gateway_ip           = lookup(var.subnets[count.index], "gateway_ip", null)
+  no_gateway           = lookup(var.subnets[count.index], "no_gateway", null)
+  dns_publish_fixed_ip = lookup(var.subnets[count.index], "dns_publish_fixed_ip", null)
+  service_types        = lookup(var.subnets[count.index], "service_types", null)
+  segment_id           = lookup(var.subnets[count.index], "segment_id", null)
+  prefix_length        = lookup(var.subnets[count.index], "prefix_length", null)
+  ipv6_address_mode    = lookup(var.subnets[count.index], "ipv6_address_mode", null)
+  ipv6_ra_mode         = lookup(var.subnets[count.index], "ipv6_ra_mode", null)
+
+  dynamic "allocation_pool" {
+    for_each = lookup(var.subnets[count.index], "allocation_pool", [])
+    content {
+      start = lookup(allocation_pool.value, "start", null)
+      end   = lookup(allocation_pool.value, "end", null)
+    }
+  }
 
   # Logic for assigning tags:
   # - If `subnet_tags` has an entry for the current subnet, it is directly assigned.
@@ -65,9 +84,10 @@ resource "openstack_networking_router_v2" "this" {
   description             = lookup(var.router, "description", null)
   external_network_id     = var.router.external_network_id
   enable_snat             = lookup(var.router, "enable_snat", false)
+  external_qos_policy_id  = lookup(var.router, "external_qos_policy_id", null)
   region                  = var.region == null ? null : var.region
   availability_zone_hints = var.az == null ? null : var.az
-  tags                    = var.router_tags != [] ? var.router_tags : null
+  tags                    = length(var.router_tags) > 0 ? var.router_tags : null
 
   dynamic "external_fixed_ip" {
     for_each = var.router_fixed_ips

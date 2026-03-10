@@ -1,5 +1,10 @@
 ### Global ignored files
-
 .terraform
+.terraform.lock.hcl
+!.terraform-docs.yml
+!.tflint.hcl
 .idea
 .vscode
+*.tfstate
+*.tfstate.backup
+.tfvars

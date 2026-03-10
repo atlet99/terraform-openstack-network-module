@@ -42,6 +42,36 @@ variable "az" {
   default     = null
 }
 
+variable "mtu" {
+  type        = number
+  description = "The network maximum transmission unit (MTU)"
+  default     = null
+}
+
+variable "port_security_enabled" {
+  type        = bool
+  description = "Whether the network should have port security enabled or not"
+  default     = null
+}
+
+variable "dns_domain" {
+  type        = string
+  description = "The network DNS domain"
+  default     = null
+}
+
+variable "qos_policy_id" {
+  type        = string
+  description = "The QoS policy ID for the network"
+  default     = null
+}
+
+variable "transparent_vlan" {
+  type        = bool
+  description = "Set to true to enable transparent VLANs"
+  default     = null
+}
+
 ########
 # Router
 ########
@@ -49,12 +79,13 @@ variable "az" {
 variable "router" {
   description = "Information used to create and/or connect router to subnets"
   type = object({
-    create              = bool
-    name                = optional(string, null)
-    description         = optional(string, null)
-    external_network_id = string
-    enable_snat         = optional(bool, false)
-    force_destroy       = optional(bool, false)
+    create                 = bool
+    name                   = optional(string, null)
+    description            = optional(string, null)
+    external_network_id    = string
+    enable_snat            = optional(bool, false)
+    force_destroy          = optional(bool, false)
+    external_qos_policy_id = optional(string, null)
   })
 }
 
