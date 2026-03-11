@@ -88,6 +88,7 @@ This is an open source project under the [MIT](https://github.com/atlet99/terraf
 | <a name="input_mtu"></a> [mtu](#input\_mtu) | The network maximum transmission unit (MTU) | `number` | `null` | no |
 | <a name="input_name"></a> [name](#input\_name) | Name of network | `string` | n/a | yes |
 | <a name="input_name_prefix"></a> [name\_prefix](#input\_name\_prefix) | Name prefix of network | `string` | `""` | no |
+| <a name="input_network_tags"></a> [network\_tags](#input\_network\_tags) | List of tags for the network | `list(string)` | `[]` | no |
 | <a name="input_port_security_enabled"></a> [port\_security\_enabled](#input\_port\_security\_enabled) | Whether the network should have port security enabled or not | `bool` | `null` | no |
 | <a name="input_qos_policy_id"></a> [qos\_policy\_id](#input\_qos\_policy\_id) | The QoS policy ID for the network | `string` | `null` | no |
 | <a name="input_region"></a> [region](#input\_region) | Region where resources will be created | `string` | `""` | no |
@@ -103,6 +104,7 @@ This is an open source project under the [MIT](https://github.com/atlet99/terraf
 
 | Name | Description |
 |------|-------------|
+| <a name="output_network"></a> [network](#output\_network) | The network resource |
 | <a name="output_network_id"></a> [network\_id](#output\_network\_id) | The ID of the network |
 | <a name="output_router_id"></a> [router\_id](#output\_router\_id) | The ID of the router |
 | <a name="output_subnets"></a> [subnets](#output\_subnets) | List of created subnets |

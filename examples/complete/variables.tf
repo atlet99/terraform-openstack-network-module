@@ -90,13 +90,20 @@ variable "subnets" {
       dns_publish_fixed_ip = true
     },
     {
-      name            = "example-subnet-2"
-      cidr            = "10.0.2.0/24"
-      ip_version      = 4
-      dns_nameservers = ["8.8.8.8"]
-      enable_dhcp     = true
+      name                 = "example-subnet-2"
+      cidr                 = "10.0.2.0/24"
+      ip_version           = 4
+      dns_nameservers      = ["8.8.8.8"]
+      enable_dhcp          = true
+      dns_publish_fixed_ip = false
     }
   ]
+}
+
+variable "network_tags" {
+  description = "List of tags for the network"
+  type        = list(string)
+  default     = ["network-tag"]
 }
 
 variable "subnet_tags" {

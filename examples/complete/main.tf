@@ -9,6 +9,7 @@ module "network" {
 
   admin_state_up = var.admin_state_up
   az             = var.az
+  network_tags   = var.network_tags
 
   router           = var.router
   router_tags      = var.router_tags

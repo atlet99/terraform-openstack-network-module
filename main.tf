@@ -9,7 +9,7 @@ locals {
 }
 
 resource "openstack_networking_network_v2" "this" {
-  count                   = var.create && false == var.use_name_prefix ? 1 : 0
+  count                   = var.create ? 1 : 0
   name                    = local.this_net_name
   description             = var.description
   admin_state_up          = var.admin_state_up
@@ -20,6 +20,7 @@ resource "openstack_networking_network_v2" "this" {
   dns_domain              = var.dns_domain
   qos_policy_id           = var.qos_policy_id
   transparent_vlan        = var.transparent_vlan
+  tags                    = var.network_tags
 }
 
 resource "openstack_networking_subnet_v2" "this" {

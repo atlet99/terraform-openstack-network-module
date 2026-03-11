@@ -1,3 +1,13 @@
+output "network" {
+  description = "The network resource"
+  value = length(openstack_networking_network_v2.this) > 0 ? {
+    id       = openstack_networking_network_v2.this[0].id
+    name     = openstack_networking_network_v2.this[0].name
+    tags     = openstack_networking_network_v2.this[0].tags
+    all_tags = openstack_networking_network_v2.this[0].all_tags
+  } : null
+}
+
 output "network_id" {
   description = "The ID of the network"
   value       = length(openstack_networking_network_v2.this) > 0 ? openstack_networking_network_v2.this[0].id : null

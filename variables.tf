@@ -72,6 +72,12 @@ variable "transparent_vlan" {
   default     = null
 }
 
+variable "network_tags" {
+  description = "List of tags for the network"
+  type        = list(string)
+  default     = []
+}
+
 ########
 # Router
 ########
